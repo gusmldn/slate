@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Virtual MGA API Docs</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,8 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="php">PHP</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -228,16 +226,16 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#brit-homeguard-api" class="toc-h1 toc-link" data-title="Brit HomeGuard API">Brit HomeGuard API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#create-submission" class="toc-h2 toc-link" data-title="Create Submission">Create Submission</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#rate-submission" class="toc-h2 toc-link" data-title="Rate Submission">Rate Submission</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#bind-submission" class="toc-h2 toc-link" data-title="Bind Submission">Bind Submission</a>
                   </li>
               </ul>
           </li>
@@ -246,7 +244,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://www.virtualmga.com'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -254,183 +252,1740 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p><a href='www.virtualmga.com'>Virtual MGA</a> helps underwriters and organizations more effectively build and distribute their insurance products online to their trading partners.  VMGA offers an in-house underwriting platform to not only manage their rating, underwriting rules, and document generation;
+but also to manage their capacity by tracking aggregates across a variety of exposure and premium attributes.<br>
+<ul><li>Our <a href="#brit-homeguard-api">Brit HomeGuard API</a> can supply coverholders with a quote from a set of risk details for a location or fully manage the entire policy lifecyle of the risk with functions that include create, bind, endorse, and renewal.</li></ul></p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="success">
+Please send an e-mail to <a href="mailto:webservices@virtualmga.com">webservices@virtualmga.com</a> for any issues or inquiries to our API online.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://brit.virtualmga.com/restservice/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE='</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/xml'</span> <span class="se">\</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+</code></pre><pre class="highlight php tab-php"><code> <span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'https://brit.virtualmga.com/restservice/'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE='</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'text/xml'</span>
+<span class="p">));</span>
+
+</code></pre>
+<p>Virtual MGA provides a REST API over HTTPS.  Unencrypted HTTP is not supported due to data privacy requirements.  Authentication will be handled using basic HTTPS authentication. </p>
+
+<p>The communication mechanism to encapsulate data is XML.  The only supported HTTP method is POST.  Any attached XML samples are the only supported POST data sets.  All request headers should contain a content-type of application/xml. </p>
+
+<p>A username and password is required to allow access to the API. You can register a new coverholder by sending an e-mail to <a href="mailto:webservices@virtualmga.com">webservices@virtualmga.com</a> with your specific request.</p>
+
+<p>Virtual MGA expects you to pass your credentials as a Base64-encoded header or as parameters in an HTTP client.  When you pass your credentials in the header, you must Base64-encode them.  The following is an example of an encoded
+HTTP Basic Authentication header:</p>
+
+<p><code>Authorization: Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE</code></p>
+<h1 id='brit-homeguard-api'>Brit HomeGuard API</h1><h2 id='create-submission'>Create Submission</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://brit.virtualmga.com/restservice/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE='</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/xml'</span> <span class="se">\</span>
+  -d <span class="s1">'&lt;template&gt;
+  &lt;template_id&gt;brit_homeguard_create_submission&lt;/template_id&gt;
+  &lt;request&gt;
+    &lt;underwriter_id&gt;10000&lt;/underwriter_id&gt;
+    &lt;effective_date&gt;2019-03-15&lt;/effective_date&gt;
+    &lt;expiration_date&gt;2020-03-15&lt;/expiration_date&gt;
+    &lt;entity_type&gt;Individual&lt;/entity_type&gt;
+    &lt;applicant&gt;
+      &lt;first_name&gt;Gus&lt;/first_name&gt;
+      &lt;middle_name&gt;New&lt;/middle_name&gt;
+      &lt;last_name&gt;Test&lt;/last_name&gt;
+      &lt;full_name&gt;&lt;/full_name&gt;
+      &lt;dba&gt;&lt;/dba&gt;
+      &lt;co_applicant_full_name&gt;&lt;/co_applicant_full_name&gt;
+      &lt;address&gt;
+        &lt;location_street_number&gt;8110&lt;/location_street_number&gt;
+        &lt;location_street_address&gt;Ranch Road 2222&lt;/location_street_address&gt;
+        &lt;location_unit_number&gt;Apt 53&lt;/location_unit_number&gt;
+        &lt;location_zip&gt;78730&lt;/location_zip&gt;
+        &lt;location_city&gt;Austin&lt;/location_city&gt;
+        &lt;location_state&gt;TX&lt;/location_state&gt;
+        &lt;location_county&gt;Travis&lt;/location_county&gt;
+      &lt;/address&gt;
+      &lt;mailing_address&gt;
+        &lt;mailing_street_number&gt;8110&lt;/mailing_street_number&gt;
+        &lt;mailing_street_address&gt;Ranch Road 2222&lt;/mailing_street_address&gt;
+        &lt;mailing_unit_number&gt;Apt 53&lt;/mailing_unit_number&gt;
+        &lt;mailing_zip&gt;78730&lt;/mailing_zip&gt;
+        &lt;mailing_city&gt;Austin&lt;/mailing_city&gt;
+        &lt;mailing_state&gt;TX&lt;/mailing_state&gt;
+      &lt;/mailing_address&gt;
+    &lt;/applicant&gt;
+  &lt;/request&gt;
+&lt;/template&gt;
+'</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">'https://brit.virtualmga.com/restservice/'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE='</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/xml'</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">'&lt;template&gt;
+  &lt;template_id&gt;brit_homeguard_create_submission&lt;/template_id&gt;
+  &lt;request&gt;
+    &lt;underwriter_id&gt;10000&lt;/underwriter_id&gt;
+    &lt;effective_date&gt;2019-03-15&lt;/effective_date&gt;
+    &lt;expiration_date&gt;2020-03-15&lt;/expiration_date&gt;
+    &lt;entity_type&gt;Individual&lt;/entity_type&gt;
+    &lt;applicant&gt;
+      &lt;first_name&gt;Gus&lt;/first_name&gt;
+      &lt;middle_name&gt;New&lt;/middle_name&gt;
+      &lt;last_name&gt;Test&lt;/last_name&gt;
+      &lt;full_name&gt;&lt;/full_name&gt;
+      &lt;dba&gt;&lt;/dba&gt;
+      &lt;co_applicant_full_name&gt;&lt;/co_applicant_full_name&gt;
+      &lt;address&gt;
+        &lt;location_street_number&gt;8110&lt;/location_street_number&gt;
+        &lt;location_street_address&gt;Ranch Road 2222&lt;/location_street_address&gt;
+        &lt;location_unit_number&gt;Apt 53&lt;/location_unit_number&gt;
+        &lt;location_zip&gt;78730&lt;/location_zip&gt;
+        &lt;location_city&gt;Austin&lt;/location_city&gt;
+        &lt;location_state&gt;TX&lt;/location_state&gt;
+        &lt;location_county&gt;Travis&lt;/location_county&gt;
+      &lt;/address&gt;
+      &lt;mailing_address&gt;
+        &lt;mailing_street_number&gt;8110&lt;/mailing_street_number&gt;
+        &lt;mailing_street_address&gt;Ranch Road 2222&lt;/mailing_street_address&gt;
+        &lt;mailing_unit_number&gt;Apt 53&lt;/mailing_unit_number&gt;
+        &lt;mailing_zip&gt;78730&lt;/mailing_zip&gt;
+        &lt;mailing_city&gt;Austin&lt;/mailing_city&gt;
+        &lt;mailing_state&gt;TX&lt;/mailing_state&gt;
+      &lt;/mailing_address&gt;
+    &lt;/applicant&gt;
+  &lt;/request&gt;
+&lt;/template&gt;
+'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns XML structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<pre class="highlight xml tab-xml"><code><span class="nt">&lt;response&gt;</span>
+    <span class="nt">&lt;status&gt;</span>Success<span class="nt">&lt;/status&gt;</span>
+    <span class="nt">&lt;message&gt;</span>
+        <span class="cp">&lt;![CDATA[Submission  found. Submission id is '612']]&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;message&gt;</span>
+        <span class="cp">&lt;![CDATA[App Flow Brit.API.HomeGuard.CreateSubmission executed]]&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;message&gt;</span>
+        <span class="cp">&lt;![CDATA[Submission  processed.]]&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;request_id&gt;</span>EE0E340D46A511E9A2F874867AF229DE<span class="nt">&lt;/request_id&gt;</span>
+    <span class="nt">&lt;submission&gt;</span>
+        <span class="nt">&lt;success&gt;</span>true<span class="nt">&lt;/success&gt;</span>
+        <span class="nt">&lt;response_date&gt;</span>2019-03-14 17:10:12<span class="nt">&lt;/response_date&gt;</span>
+        <span class="nt">&lt;app_number&gt;</span>APP-001323<span class="nt">&lt;/app_number&gt;</span>
+    <span class="nt">&lt;/submission&gt;</span>
+<span class="nt">&lt;/response&gt;</span> 
+</code></pre>
+<p>This method creates a new submission on Virtual MGA Platform and returns a unique ID to be used for quote.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><code>POST https://brit.virtualmga.com/restservice/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Field</th>
+<th>Required</th>
+<th>Value Type</th>
 <th>Description</th>
+<th>Accepted Values</th>
+<th>Validation Rules/Notes</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>template</td>
+<td>Y</td>
+<td>Root element</td>
+<td>Main Detail Structure</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>template_id</td>
+<td>Y</td>
+<td>String</td>
+<td>The API method being invoked</td>
+<td>brit_homeguard_create_submission</td>
+<td></td>
+</tr>
+<tr>
+<td>request</td>
+<td>Y</td>
+<td>Child of &quot;template&quot; element</td>
+<td>Structure underneath template that contains create submission details</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>underwriter_id</td>
+<td>Y</td>
+<td>String</td>
+<td>Unique Branch ID for coverholder on VMGA</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>effective_date</td>
+<td>Y</td>
+<td>Date</td>
+<td>The proposed effective date of the policy</td>
+<td></td>
+<td>Cannot backdate more than 60 days from current system date.  Must be in the format of yyyy-mm-dd</td>
+</tr>
+<tr>
+<td>expiration_date</td>
+<td>Y</td>
+<td>Date</td>
+<td>The proposed expiration date of the policy</td>
+<td></td>
+<td>Must be at least one day after the effective date.  Must be in the format of yyyy-mm-dd</td>
+</tr>
+<tr>
+<td>entity_type</td>
+<td>Y</td>
+<td>String</td>
+<td>Type of corporate entity type of the insured.</td>
+<td>Individual, Partnership, Joint Venture, Corporation, Limited Liability Company, Trust, Other</td>
+<td></td>
+</tr>
+<tr>
+<td>applicant</td>
+<td>Y</td>
+<td>Child of &quot;request&quot; element</td>
+<td>Structure underneath request that contains applicant details</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>Y*</td>
+<td>String</td>
+<td>First name of the individual applicant.</td>
+<td></td>
+<td>If entity type is NOT individual, use “full_name” instead.</td>
+</tr>
+<tr>
+<td>middle_name</td>
+<td>N</td>
+<td>String</td>
+<td>Middle name of  the individual applicant.</td>
+<td></td>
+<td>If entity type is NOT individual, use “full_name” instead</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>Y*</td>
+<td>String</td>
+<td>Last name of the individual applicant.</td>
+<td></td>
+<td>If entity type is NOT individual, use “full_name” instead</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td>N*</td>
+<td>String</td>
+<td>Full name of the applicant not an individual</td>
+<td></td>
+<td>Required if entity type is anything other than “Individual”.</td>
+</tr>
+<tr>
+<td>dba</td>
+<td>N</td>
+<td>String</td>
+<td>Doing Business As</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>co_applicant_full_name</td>
+<td>N</td>
+<td>String</td>
+<td>Co Applicant Full Name</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>address</td>
+<td>Y</td>
+<td>Child of &quot;request&quot; element</td>
+<td>Structure underneath request that contains the address details for the risk</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>location_street_number</td>
+<td>Y</td>
+<td>String</td>
+<td>Street number of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_street_address</td>
+<td>Y</td>
+<td>String</td>
+<td>Street address of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_unit_number</td>
+<td>N</td>
+<td>String</td>
+<td>Apartment/Suite number of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_zip</td>
+<td>Y</td>
+<td>String</td>
+<td>Postal code of the primary risk location</td>
+<td></td>
+<td>US zip code only.  5-digit zip code i.e. 90210</td>
+</tr>
+<tr>
+<td>location_city</td>
+<td>Y</td>
+<td>String</td>
+<td>City of the primary risk location</td>
+<td></td>
+<td>US city only</td>
+</tr>
+<tr>
+<td>location_state</td>
+<td>Y</td>
+<td>String</td>
+<td>State of the primary risk location</td>
+<td></td>
+<td>US state only including DC.  Two-Letter US state abbreviation i.e. AZ.</td>
+</tr>
+<tr>
+<td>location_county</td>
+<td>Y</td>
+<td>String</td>
+<td>County of the primary risk location</td>
+<td></td>
+<td>US county only</td>
+</tr>
+<tr>
+<td>mailing_address</td>
+<td>Y</td>
+<td>Child of &quot;request&quot; element</td>
+<td>Structure underneath request that contains the mailing address details</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mailing_country</td>
+<td>Y</td>
+<td>String</td>
+<td>County name of the mailing location</td>
+<td>United States, Canada</td>
+<td>United States or Canada only</td>
+</tr>
+<tr>
+<td>mailing_street_number</td>
+<td>Y</td>
+<td>String</td>
+<td>Street number of the mailing location</td>
+<td></td>
+<td>US or CA address only</td>
+</tr>
+<tr>
+<td>mailing_street_address</td>
+<td>Y</td>
+<td>String</td>
+<td>Street address of the mailing location</td>
+<td></td>
+<td>US or CA address only</td>
+</tr>
+<tr>
+<td>mailing_unit_number</td>
+<td>N</td>
+<td>String</td>
+<td>Apartment/Suite number of the mailing location</td>
+<td></td>
+<td>US or CA address only</td>
+</tr>
+<tr>
+<td>mailing_zip</td>
+<td>Y</td>
+<td>String</td>
+<td>Postal code of the mailing location</td>
+<td></td>
+<td>US zip code or CA postal code only.  5-digit zip code i.e. 90210.  CA Postal Code format i.e. A1A 1A1</td>
+</tr>
+<tr>
+<td>mailing_city</td>
+<td>Y</td>
+<td>String</td>
+<td>City of the mailing location</td>
+<td></td>
+<td>US city only</td>
+</tr>
+<tr>
+<td>mailing_state</td>
+<td>Y</td>
+<td>String</td>
+<td>US State or Canadian Province of the mailing location</td>
+<td></td>
+<td>Two-Letter Abbreviation</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+The response should return "success" in the status node when a successful request is submitted.  The app_number should now be used for requesting a quote.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='rate-submission'>Rate Submission</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://britcnfg.virtualmga.com/restservice/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Basic YnJpdGFwaUB2aXJ0dWFsbWdhLmNvbTpCcml0YXBpdGVzdDE='</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: text/xml'</span> <span class="se">\</span>
+  -H <span class="s1">'Postman-Token: 0ecd31e5-3f9f-484f-a6b9-4c3eaa8397b6'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -d <span class="s1">'&lt;template&gt;
+  &lt;template_id&gt;brit_homeguard_rate&lt;/template_id&gt;
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  &lt;request&gt;
+        &lt;effective_date&gt;2019-03-04&lt;/effective_date&gt;
+        &lt;expiration_date&gt;2020-03-04&lt;/expiration_date&gt;
+        &lt;form_type&gt;HO3&lt;/form_type&gt;
+        &lt;locations&gt;
+            &lt;location&gt;
+            &lt;location_number&gt;1&lt;/location_number&gt;
+            &lt;location_street_number&gt;1&lt;/location_street_number&gt;
+            &lt;location_street_address&gt;Pasadena Avenue&lt;/location_street_address&gt;
+            &lt;location_unit_number /&gt;
+            &lt;location_zip&gt;91030&lt;/location_zip&gt;
+            &lt;location_city&gt;South Pasadena&lt;/location_city&gt;
+            &lt;location_state&gt;CA&lt;/location_state&gt;
+            &lt;location_county&gt;Los Angeles&lt;/location_county&gt;
+            &lt;high_risk_area_ind&gt;N&lt;/high_risk_area_ind&gt;
+            &lt;number_families_primary_dwelling&gt;1&lt;/number_families_primary_dwelling&gt;
+            &lt;wind_coverage_ind&gt;Y&lt;/wind_coverage_ind&gt;
+            &lt;earthquake_coverage_ind&gt;Y&lt;/earthquake_coverage_ind&gt;
+            &lt;tuck_under_parking_ind&gt;N&lt;/tuck_under_parking_ind&gt;
+            &lt;tilt_up_construction_ind&gt;N&lt;/tilt_up_construction_ind&gt;
+            &lt;retrofitted_to_code_ind&gt;N&lt;/retrofitted_to_code_ind&gt;
+            &lt;retrofit_year&gt;&lt;/retrofit_year&gt;
+            &lt;california_quake_requirement&gt;LIMITED&lt;/california_quake_requirement&gt;
+            &lt;masonry_veneer_coverage_ind&gt;Y&lt;/masonry_veneer_coverage_ind&gt;
+            &lt;distance_to_water&gt;17.63&lt;/distance_to_water&gt;
+            &lt;construction_type&gt;BV&lt;/construction_type&gt;
+            &lt;square_feet&gt;2000&lt;/square_feet&gt;
+            &lt;year_built&gt;1999&lt;/year_built&gt;
+            &lt;year_renovated&gt;2015&lt;/year_renovated&gt;
+            &lt;wiring_update_year&gt;2015&lt;/wiring_update_year&gt;
+            &lt;wiring_update_type&gt;COMPLETE&lt;/wiring_update_type&gt;
+            &lt;plumbing_update_year&gt;2015&lt;/plumbing_update_year&gt;
+            &lt;plumbing_update_type&gt;Complete&lt;/plumbing_update_type&gt;
+            &lt;heating_update_year&gt;2015&lt;/heating_update_year&gt;
+            &lt;heating_update_type&gt;Complete&lt;/heating_update_type&gt;
+            &lt;roof_update_year&gt;2015&lt;/roof_update_year&gt;
+            &lt;roof_update_type&gt;Complete&lt;/roof_update_type&gt;
+            &lt;roof_shape&gt;GBL&lt;/roof_shape&gt;
+            &lt;roof_material&gt;CPSHG&lt;/roof_material&gt;
+            &lt;sprinklers&gt;LOCAL&lt;/sprinklers&gt;
+            &lt;smoke_alarm&gt;LOCAL&lt;/smoke_alarm&gt;
+            &lt;burglar_alarm&gt;LOCAL&lt;/burglar_alarm&gt;
+            &lt;automatic_water_shutoff&gt;NONE&lt;/automatic_water_shutoff&gt;
+            &lt;hurricane_protection_ind&gt;N&lt;/hurricane_protection_ind&gt;
+            &lt;dwelling_value&gt;333444&lt;/dwelling_value&gt;
+            &lt;other_structures&gt;50000&lt;/other_structures&gt;
+            &lt;personal_property&gt;166722&lt;/personal_property&gt;
+            &lt;loss_of_use&gt;66689&lt;/loss_of_use&gt;
+            &lt;liability_limit&gt;EXCLUDED&lt;/liability_limit&gt;
+            &lt;medical_payments&gt;EXCLUDED&lt;/medical_payments&gt;
+            &lt;full_limits_trampoline_firearms_ind&gt;N&lt;/full_limits_trampoline_firearms_ind&gt;
+            &lt;sinkhole_coverage_ind&gt;N&lt;/sinkhole_coverage_ind&gt;
+            &lt;located_in_brush_zone_ind&gt;Y&lt;/located_in_brush_zone_ind&gt;
+            &lt;brush_clearance&gt;1000&lt;/brush_clearance&gt;
+            &lt;wind_deductible_type&gt;WND&lt;/wind_deductible_type&gt;
+            &lt;set_aop_deductible_as_wind_ind&gt;Y&lt;/set_aop_deductible_as_wind_ind&gt;
+            &lt;wind_deductible_percent&gt;0&lt;/wind_deductible_percent&gt;
+            &lt;earthquake_deductible_percent&gt;10&lt;/earthquake_deductible_percent&gt;
+            &lt;earthquake_deductible_amount xsi:nil="true" /&gt;
+            &lt;workers_comp_ind&gt;N&lt;/workers_comp_ind&gt;
+            &lt;number_workers&gt;2&lt;/number_workers&gt;
+            &lt;aop_deductible_amount&gt;10000&lt;/aop_deductible_amount&gt;
+            &lt;aop_deductible_percent xsi:nil="true" /&gt;
+            &lt;occupancy&gt;
+                &lt;occupancy_type&gt;P&lt;/occupancy_type&gt;
+                &lt;dwelling_rental_term_type&gt;NONE&lt;/dwelling_rental_term_type&gt;
+                &lt;dwelling_rental_term_period&gt;&lt;/dwelling_rental_term_period&gt;
+                &lt;dwelling_under_renovation_ind&gt;N&lt;/dwelling_under_renovation_ind&gt;
+            &lt;/occupancy&gt;
+            &lt;ppc&gt;
+                &lt;protection_class&gt;1&lt;/protection_class&gt;
+                &lt;dwelling_within_1000_ft_water_ind&gt;N&lt;/dwelling_within_1000_ft_water_ind&gt;
+                &lt;responding_fire_dept_in_range_ind xsi:nil="true" /&gt;
+                &lt;property_accessible_by_road_ind&gt;Y&lt;/property_accessible_by_road_ind&gt;
+                &lt;property_occupied_daily_ind&gt;Y&lt;/property_occupied_daily_ind&gt;
+                &lt;property_visible_ind&gt;Y&lt;/property_visible_ind&gt;
+            &lt;/ppc&gt;
+            &lt;extended_liability&gt;
+                &lt;extend_liability_additional_locations_ind&gt;N&lt;/extend_liability_additional_locations_ind&gt;
+                &lt;number_additional_locations xsi:nil="true" /&gt;
+            &lt;/extended_liability&gt;
+            &lt;optional_coverages&gt;
+                &lt;broad_theft_limit xsi:nil="true" /&gt;
+                &lt;on_and_off_premises_ind&gt;N&lt;/on_and_off_premises_ind&gt;
+                &lt;earthquake_sprinkler_leakage_ind&gt;N&lt;/earthquake_sprinkler_leakage_ind&gt;
+                &lt;enhanced_additional_coverages_ind&gt;N&lt;/enhanced_additional_coverages_ind&gt;
+                &lt;extended_replacement_cost_percent xsi:nil="true" /&gt;
+                &lt;golf_cart_physical_damage_ind&gt;N&lt;/golf_cart_physical_damage_ind&gt;
+                &lt;golf_cart_limit xsi:nil="true" /&gt;
+                &lt;special_form_additions_alterations_ind&gt;N&lt;/special_form_additions_alterations_ind&gt;
+                &lt;special_form_personal_property_ind&gt;N&lt;/special_form_personal_property_ind&gt;
+                &lt;recreational_motor_vehicle_liability_ind&gt;N&lt;/recreational_motor_vehicle_liability_ind&gt;
+                &lt;increased_business_limit xsi:nil="true" /&gt;
+                &lt;increased_special_liability_limit_ind&gt;N&lt;/increased_special_liability_limit_ind&gt;
+                &lt;large_loss_deductible_waiver_ind&gt;N&lt;/large_loss_deductible_waiver_ind&gt;
+                &lt;limited_mold_property_limit xsi:nil="true" /&gt;
+                &lt;limited_mold_liability_limit xsi:nil="true" /&gt;
+                &lt;limited_pollution_property_limit xsi:nil="true" /&gt;
+                &lt;limited_pollution_liability_limit xsi:nil="true" /&gt;
+                &lt;loss_assessment_limit&gt;1000&lt;/loss_assessment_limit&gt;
+                &lt;mandatory_evacuation_ind&gt;N&lt;/mandatory_evacuation_ind&gt;
+                &lt;ordinance_and_law_percent&gt;10&lt;/ordinance_and_law_percent&gt;
+                &lt;personal_injury_ind&gt;N&lt;/personal_injury_ind&gt;
+                &lt;personal_property_other_location_percent xsi:nil="true" /&gt;
+                &lt;excess_personal_property_amount xsi:nil="true" /&gt;
+                &lt;replacement_cost_certain_structures_ind&gt;Y&lt;/replacement_cost_certain_structures_ind&gt;
+                &lt;special_computer_coverage_ind&gt;N&lt;/special_computer_coverage_ind&gt;
+                &lt;tenant_relocation_expenses_ind&gt;N&lt;/tenant_relocation_expenses_ind&gt;
+                &lt;coc_soft_costs xsi:nil="true" /&gt;
+                &lt;coc_theft_of_materials xsi:nil="true" /&gt;
+                &lt;coc_transit xsi:nil="true" /&gt;
+                &lt;water_backup_limit xsi:nil="true" /&gt;
+            &lt;/optional_coverages&gt;
+            &lt;personal_articles_floater&gt;
+                &lt;personal_articles&gt;N&lt;/personal_articles&gt;
+                &lt;deductible_excluded_ind&gt;Y&lt;/deductible_excluded_ind&gt;
+                &lt;deductible_amount xsi:nil="true" /&gt;
+                &lt;blanket_fine_arts_breakage_limit xsi:nil="true" /&gt;
+                &lt;blanket_fine_arts_non_breakage_limit xsi:nil="true" /&gt;
+                &lt;blanket_jewelry_limit xsi:nil="true" /&gt;
+                &lt;cameras_limit xsi:nil="true" /&gt;
+                &lt;fine_arts_breakage_scheduled_limit xsi:nil="true" /&gt;
+                &lt;fine_arts_non_breakage_scheduled_limit xsi:nil="true" /&gt;
+                &lt;furs_limit xsi:nil="true" /&gt;
+                &lt;golf_equipment_limit xsi:nil="true" /&gt;
+                &lt;firearms_limit xsi:nil="true" /&gt;
+                &lt;mens_jewelry_limit xsi:nil="true" /&gt;
+                &lt;musical_instruments_limit xsi:nil="true" /&gt;
+                &lt;stamps_limit xsi:nil="true" /&gt;
+                &lt;coins_limit xsi:nil="true" /&gt;
+                &lt;silverware_limit xsi:nil="true" /&gt;
+                &lt;womens_jewelry_limit xsi:nil="true" /&gt;
+                &lt;vault_jewelry_limit xsi:nil="true" /&gt;
+                &lt;wine_collections_limit xsi:nil="true" /&gt;
+                &lt;blanket_wine_collections_limit xsi:nil="true" /&gt;
+            &lt;/personal_articles_floater&gt;
+        &lt;/location&gt;
+        &lt;/locations&gt;
+    &lt;/request&gt;
+&lt;/template&gt;'</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns XML structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<pre class="highlight xml tab-xml"><code>  <span class="nt">&lt;response&gt;</span>
+    <span class="nt">&lt;status&gt;</span>Success<span class="nt">&lt;/status&gt;</span>
+    <span class="nt">&lt;message&gt;</span>
+        <span class="cp">&lt;![CDATA[Request processing..]]&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;message&gt;</span>
+        <span class="cp">&lt;![CDATA[App Flow Brit.API.HomeGuard.Rate executed]]&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;request_id&gt;</span>D482B2CB49A111E9A2F874867AF229DE<span class="nt">&lt;/request_id&gt;</span>
+    <span class="nt">&lt;rate&gt;</span>
+        <span class="nt">&lt;success&gt;</span>true<span class="nt">&lt;/success&gt;</span>
+        <span class="nt">&lt;response_date&gt;</span>2019-03-18 12:18:29<span class="nt">&lt;/response_date&gt;</span>
+        <span class="nt">&lt;rater_version_applied&gt;</span>v2.220<span class="nt">&lt;/rater_version_applied&gt;</span>
+        <span class="nt">&lt;packages&gt;</span>
+            <span class="nt">&lt;package&gt;</span>
+                <span class="nt">&lt;name&gt;</span>Standard<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;premium&gt;</span>5895<span class="nt">&lt;/premium&gt;</span>
+                <span class="nt">&lt;locations&gt;</span>
+                    <span class="nt">&lt;location&gt;</span>
+                        <span class="nt">&lt;location_number&gt;</span>1<span class="nt">&lt;/location_number&gt;</span>
+                        <span class="nt">&lt;location_premium&gt;</span>5895<span class="nt">&lt;/location_premium&gt;</span>
+                        <span class="nt">&lt;optional_coverages&gt;</span>
+                            <span class="nt">&lt;ordinance_and_law_percent&gt;</span>10<span class="nt">&lt;/ordinance_and_law_percent&gt;</span>
+                            <span class="nt">&lt;replacement_cost_certain_structures_ind&gt;</span>Included<span class="nt">&lt;/replacement_cost_certain_structures_ind&gt;</span>
+                            <span class="nt">&lt;inflation_guard_percent&gt;</span>3<span class="nt">&lt;/inflation_guard_percent&gt;</span>
+                            <span class="nt">&lt;id_fraud_recovery_limit&gt;</span>25000<span class="nt">&lt;/id_fraud_recovery_limit&gt;</span>
+                            <span class="nt">&lt;mechanical_breakdown_limit&gt;</span>100000<span class="nt">&lt;/mechanical_breakdown_limit&gt;</span>
+                            <span class="nt">&lt;service_line_limit&gt;</span>10000<span class="nt">&lt;/service_line_limit&gt;</span>
+                            <span class="nt">&lt;eco_coverage_limit&gt;</span>50000<span class="nt">&lt;/eco_coverage_limit&gt;</span>
+                        <span class="nt">&lt;/optional_coverages&gt;</span>
+                    <span class="nt">&lt;/location&gt;</span>
+                <span class="nt">&lt;/locations&gt;</span>
+            <span class="nt">&lt;/package&gt;</span>
+        <span class="nt">&lt;/packages&gt;</span>
+    <span class="nt">&lt;/rate&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
+</code></pre>
+<p>This method provides a rating quote for a specific location and set of modifiers.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>POST https://brit.virtualmga.com/restservice/</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Field</th>
+<th>Required</th>
+<th>Value Type</th>
 <th>Description</th>
+<th>Accepted Values</th>
+<th>Validation Rules/Notes</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>template_id</td>
+<td>Y</td>
+<td>String</td>
+<td>The API method being invoked</td>
+<td>brit_homeguard_rate</td>
+<td></td>
 </tr>
+<tr>
+<td>request</td>
+<td>Y</td>
+<td></td>
+<td>Structure underneath template that contains the rating details</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>effective_date</td>
+<td>Y</td>
+<td>Date</td>
+<td>The proposed effective date of the policy</td>
+<td></td>
+<td>Cannot backdate more than 60 days from current system date.  Must be in the format of yyyy-mm-dd</td>
+</tr>
+<tr>
+<td>expiration_date</td>
+<td>Y</td>
+<td>Date</td>
+<td>The proposed expiration date of the policy</td>
+<td></td>
+<td>Must be at least one day after the effective date.  Must be in the format of yyyy-mm-dd</td>
+</tr>
+<tr>
+<td>form_type</td>
+<td>Y</td>
+<td>String</td>
+<td>The primary policy coverage type</td>
+<td>HO3, HO5, HO6, DP3, HO3_WIND_ONLY, HO6_WIND_ONLY</td>
+<td></td>
+</tr>
+<tr>
+<td>locations</td>
+<td>Y</td>
+<td></td>
+<td>Structure underneath request that contains the locations to be rated</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>location</td>
+<td>Y</td>
+<td></td>
+<td>Repeating structure underneath location that details out each individual location with the rating details for that location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>location_number</td>
+<td>Y</td>
+<td>Integer</td>
+<td>The number of the location</td>
+<td></td>
+<td>Must be greater than 0.</td>
+</tr>
+<tr>
+<td>location_street_number</td>
+<td>Y</td>
+<td>String</td>
+<td>Street number of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_street_address</td>
+<td>Y</td>
+<td>String</td>
+<td>Street address of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_unit_number</td>
+<td>N</td>
+<td>String</td>
+<td>Apartment/Suite number of the primary risk location</td>
+<td></td>
+<td>US address only</td>
+</tr>
+<tr>
+<td>location_zip</td>
+<td>Y</td>
+<td>String</td>
+<td>Postal code of the primary risk location</td>
+<td></td>
+<td>US zip code only.  5-digit zip code i.e. 90210</td>
+</tr>
+<tr>
+<td>location_city</td>
+<td>Y</td>
+<td>String</td>
+<td>City of the primary risk location</td>
+<td></td>
+<td>US city only</td>
+</tr>
+<tr>
+<td>location_state</td>
+<td>Y</td>
+<td>String</td>
+<td>State of the primary risk location</td>
+<td></td>
+<td>US state only including DC.  Two letter US state abbreviation i.e. CA</td>
+</tr>
+<tr>
+<td>location_county</td>
+<td>Y</td>
+<td>String</td>
+<td>County of the primary risk location</td>
+<td></td>
+<td>US county only</td>
+</tr>
+<tr>
+<td>high_risk_area_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if the location is in a high-risk area as defined by Brit</td>
+<td>Y, N</td>
+<td>Required if zip/county/state combination for the location is one of any attached in Appendix A</td>
+</tr>
+<tr>
+<td>number_families_primary_dwelling</td>
+<td>Y</td>
+<td>Integer</td>
+<td>The number of families in the primary dwelling (not including other structures)</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>wind_coverage_ind</td>
+<td>Y</td>
+<td>Character</td>
+<td>Flag to include wind coverage at the location</td>
+<td>Y, N</td>
+<td>Must be Y if form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY”</td>
+</tr>
+<tr>
+<td>earthquake_coverage_ind</td>
+<td>Y</td>
+<td>Character</td>
+<td>Flag to include earthquake coverage at the location</td>
+<td>Y, N</td>
+<td>Must be N if form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY”</td>
+</tr>
+<tr>
+<td>tuck_under_parking_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating whether there is tuck under parking at the location</td>
+<td>Y, N</td>
+<td>Required if earthquake_coverage_ind is “Y”</td>
+</tr>
+<tr>
+<td>tilt_up_construction_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating whether there is tilt up construction at the location</td>
+<td>Y, N</td>
+<td>Required if earthquake_coverage_ind is “Y”</td>
+</tr>
+<tr>
+<td>retrofitted_to_code_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if the location has been retrofitted to code</td>
+<td>Y, N</td>
+<td>Required if earthquake_coverage_ind is “Y”</td>
+</tr>
+<tr>
+<td>retrofit_year</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The year the location was retrofitted to code</td>
+<td></td>
+<td>Required if retrofitted_to_code_ind is “Y”.  Must be greater than or equal to year_built.</td>
+</tr>
+<tr>
+<td>california_quake_requirement</td>
+<td>N*</td>
+<td>String</td>
+<td>Amount of coverage applied to location in the event of an earthquake loss</td>
+<td>FULL, LIMITED</td>
+<td>Required if location_state is “CA”.  If earthquake coverage is excluded then this must be “Limited”</td>
+</tr>
+<tr>
+<td>masonry_veneer_coverage_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if masonry veneer coverage is required at this location</td>
+<td>Y, N</td>
+<td>Required if earthquake_coverage_ind is “Y”.</td>
+</tr>
+<tr>
+<td>distance_to_water</td>
+<td>Y</td>
+<td>Decimal</td>
+<td>Distance to the nearest water source</td>
+<td></td>
+<td>Distance in miles</td>
+</tr>
+<tr>
+<td>construction_type</td>
+<td>Y</td>
+<td>String</td>
+<td>The construction type of the location</td>
+<td>F, ST, BV, EIFS_BLOCK, M, EIFS, L, SUP, FR</td>
+<td>F- Frame, ST – Stucco, BV – Brick Veneer, EIFS_BLOCK – EIFS (Over Block), M – Masonry, EIFS – EIFS (Over Frame), L – Log, SUP - Superior, FR – Fire Resistive</td>
+</tr>
+<tr>
+<td>square_feet</td>
+<td>Y</td>
+<td>Integer</td>
+<td>The total square footage for the location</td>
+<td></td>
+<td>Value must be greater than 0.</td>
+</tr>
+<tr>
+<td>year_built</td>
+<td>Y</td>
+<td>Integer</td>
+<td>The year the location was built</td>
+<td></td>
+<td>Earliest year built of 1600.  Cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>year_renovated</td>
+<td>N</td>
+<td>Integer</td>
+<td>The year the location was renovated to studs</td>
+<td></td>
+<td>Must be greater than or equal to year_built and cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>wiring_update_year</td>
+<td>N</td>
+<td>Integer</td>
+<td>The year wiring was updated in the location</td>
+<td></td>
+<td>Must be greater than or equal to year_built and cannot be more than one year in the future.  If year_renovated is provided then must be greater than or equal to year_renovated and cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>wiring_update_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Indicates whether there was a partial or complete update</td>
+<td>PARTIAL, COMPLETE</td>
+<td>Required if wiring_update_year is provided</td>
+</tr>
+<tr>
+<td>plumbing_update_year</td>
+<td>N</td>
+<td>Integer</td>
+<td>The year plumbing was updated in the location</td>
+<td></td>
+<td>Must be greater than or equal to year_built and cannot be more than one year in the future.  If year_renovated is provided then must be greater than or equal to year_renovated and cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>plumbing_update_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Indicates whether there was a partial or complete update</td>
+<td>PARTIAL, COMPLETE</td>
+<td>Required if plumbing_update_year is provided</td>
+</tr>
+<tr>
+<td>heating_update_year</td>
+<td>N</td>
+<td>Integer</td>
+<td>The year heating was updated in the location</td>
+<td></td>
+<td>Must be greater than or equal to year_built and cannot be more than one year in the future.  If year_renovated is provided then must be greater than or equal to year_renovated and cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>heating_update_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Indicates whether there was a partial or complete update</td>
+<td>PARTIAL, COMPLETE</td>
+<td>Required if heating_update_year is provided</td>
+</tr>
+<tr>
+<td>roof_update_year</td>
+<td>N</td>
+<td>Integer</td>
+<td>The year the roof was updated on the location</td>
+<td></td>
+<td>Must be greater than or equal to year_built and cannot be more than one year in the future.  If year_renovated is provided then must be greater than or equal to year_renovated and cannot be more than one year in the future</td>
+</tr>
+<tr>
+<td>roof_update_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Indicates whether there was a partial or complete update</td>
+<td>PARTIAL, COMPLETE</td>
+<td>Required if roof_update_year is provided</td>
+</tr>
+<tr>
+<td>roof_material</td>
+<td>Y</td>
+<td>String</td>
+<td>The roof material on the location</td>
+<td>CPSHG, RUB, TL, CN, MET, WDSHA, SLATE, UNK</td>
+<td>CPSHG – Composite Shingle, RUB – Rubber, TL – Tile, CN – Concrete, MET – Metal, WDSHA – Wood Shake, SLATE – Slate, UNK - Unknown</td>
+</tr>
+<tr>
+<td>roof_shape</td>
+<td>Y</td>
+<td>String</td>
+<td>The shape of the roof at the location</td>
+<td>HIP, FLT_CN, GBL, FLT, BU, OTH, UNK</td>
+<td>HIP – Hip, FLT_CN – Flat Concrete, GBL – Gable, FLT – Flat, BU – Built Up, OTH – Other, UNK - Unknown</td>
+</tr>
+<tr>
+<td>automatic_water_shutoff</td>
+<td>N*</td>
+<td>String</td>
+<td>Flag indicating if an automatic water shutoff system is present</td>
+<td>NONE, LEAK_ALERT, LEAK_SYSTEM, OTHER</td>
+<td>If form_type is not “HO3_WIND_ONLY” and “HO6_WIND_ONLY” then this field is required.  LEAK_ALERT – Leak Defense Alert, , LEAK_SYSTEM – Leak Defense System</td>
+</tr>
+<tr>
+<td>sprinklers</td>
+<td>N*</td>
+<td>String</td>
+<td>Type of sprinklers that cover at least 90% of the location</td>
+<td>NONE, LOCAL, CENTRAL</td>
+<td>If form_type is not “HO3_WIND_ONLY” and “HO6_WIND_ONLY” then this field is required.</td>
+</tr>
+<tr>
+<td>smoke_alarm</td>
+<td>N*</td>
+<td>String</td>
+<td>Type of smoke alarm present</td>
+<td>NONE, CENTRAL, LOCAL, DIRECT</td>
+<td>If form_type is not “HO3_WIND_ONLY” and “HO6_WIND_ONLY” then this field is required.</td>
+</tr>
+<tr>
+<td>burglar_alarm</td>
+<td>N*</td>
+<td>String</td>
+<td>Type of burglar alarm present</td>
+<td>NONE, CENTRAL, LOCAL, DIRECT</td>
+<td>If form_type is not “HO3_WIND_ONLY” and “HO6_WIND_ONLY” then this field is required.</td>
+</tr>
+<tr>
+<td>hurricane_protection_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if a location has approved opening protection</td>
+<td>Y, N</td>
+<td>Mandatory if location_state = “FL”.  Value is defaulted to “N” if not provided.</td>
+</tr>
+<tr>
+<td>dwelling_value</td>
+<td>Y</td>
+<td>Integer</td>
+<td>Value of the location</td>
+<td></td>
+<td>Must be greater than or equal to 0</td>
+</tr>
+<tr>
+<td>other_structures</td>
+<td>Y</td>
+<td>Integer</td>
+<td>Value of other structures at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.  Must be 0 if form_type is “HO6” or “HO6_WIND_ONLY”</td>
+</tr>
+<tr>
+<td>personal_property</td>
+<td>Y</td>
+<td>Integer</td>
+<td>Value of personal property at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0</td>
+</tr>
+<tr>
+<td>loss_of_use</td>
+<td>Y</td>
+<td>Integer</td>
+<td>Value of additional living expenses</td>
+<td></td>
+<td>Must be greater than or equal to 0</td>
+</tr>
+<tr>
+<td>liability_limit</td>
+<td>Y</td>
+<td>String</td>
+<td>Value of liability limit</td>
+<td>EXCLUDED, 300000, 500000, 1000000</td>
+<td>If occupancy_type is “COC” then liability must be “Excluded”</td>
+</tr>
+<tr>
+<td>medical_payments</td>
+<td>Y</td>
+<td>String</td>
+<td>Value of medical payments limit</td>
+<td>EXCLUDED, 2500, 5000, 10000, 25000</td>
+<td>If liability_limit is “Excluded” then this field must also be “Excluded”</td>
+</tr>
+<tr>
+<td>full_limits_trampoline_firearms_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if full limits should be applied to trampoline liability and firearm liability</td>
+<td>Y, N</td>
+<td>If liability_limit is not “Excluded” then this field is mandatory.</td>
+</tr>
+<tr>
+<td>sinkhole_coverage_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if sinkhole coverage is selected for the location</td>
+<td>Y, N</td>
+<td>If location state is one of AL,FL,TN,MO,KY then this field is mandatory, otherwise this field should be empty.  This coverage is not available if form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY”</td>
+</tr>
+<tr>
+<td>located_in_brush_zone_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if the property is in a brush zone</td>
+<td>Y, N</td>
+<td>Mandatory if location_state is one of “CA”, “OR”, “WA”, “ID”, “NV”, “UT”, “AZ”, “WY”, “CO”, “NM”.  If location state is not one of the above, this field should be empty.</td>
+</tr>
+<tr>
+<td>brush_clearance</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The distance in feet from the property to the nearest brush</td>
+<td></td>
+<td>Required if located_in_brush_zone_ind is “Y”</td>
+</tr>
+<tr>
+<td>wind_deductible_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Denotes what type of coverage the wind deductible is applicable for</td>
+<td>WND, NMWND, HRCN</td>
+<td>WND – Wind/Hail, NMWND – Named Storm, HRCN – Hurricane, , Mandatory if wind_coverage_ind is “Y”.</td>
+</tr>
+<tr>
+<td>set_aop_deductible_as_wind_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Indicates if the AOP deductible should be used as the wind deductible</td>
+<td>Y, N</td>
+<td>Mandatory if wind_coverage_ind is “Y”.  Value must be “N”  if form_type = “HO3_WIND_ONLY” or “HO6_WIND_ONLY”</td>
+</tr>
+<tr>
+<td>wind_deductible_percent</td>
+<td>N*</td>
+<td>Decimal</td>
+<td>The deductible to be paid in the event of a wind loss</td>
+<td>1, 2, 3, 5, 10</td>
+<td>1 – 1%, 2 – 2%, 3 – 3%, 5 – 5%, 10 – 10%.  Mandatory if wind_coverage_ind is “Y” and set_aop_deductible_as_wind_ind is “N”.  If set_aop_deductible_as_wind_ind is “Y” the value in wind_deductible_percent will be ignored.</td>
+</tr>
+<tr>
+<td>earthquake_deductible_percent</td>
+<td>N*</td>
+<td>Decimal</td>
+<td>The deductible to be paid in the event of an earthquake loss</td>
+<td>2, 5, 10, 15, 20</td>
+<td>Mandatory if earthquake_coverage_ind is “Y”.  2 – 2%, 5 – 5%, 10 – 10%, 15 – 15%, 20 – 20%.  Only one of earthquake_deductible_percent and earthquake_deductible_amount can be provided.</td>
+</tr>
+<tr>
+<td>earthquake_deductible_amount</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The deductible to be paid in the event of an earthquake loss</td>
+<td>25000</td>
+<td>Mandatory if earthquake_coverage_ind is “Y”.  Not available if location_state is one of “CA”,”OR”,”WA”,”UT”,”MT”,”WY”,”SC”,”AR”,”IL”,”IN”,”KY”,”MO”,”MS”,”TN”,”AK”,”HI”.  Only one of earthquake_deductible_percent and earthquake_deductible_amount can be provided.</td>
+</tr>
+<tr>
+<td>workers_comp_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if worker’s compensation coverage is applied to the location</td>
+<td>Y, N</td>
+<td>Required if location_state is one of “CA”, “NY”, “NJ”, “NH”.  If location state is not one of the above, this field should be empty.</td>
+</tr>
+<tr>
+<td>number_workers</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The number of workers being covered</td>
+<td></td>
+<td>Required if workers_comp_ind is “Y”.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>aop_deductible_amount</td>
+<td>Y</td>
+<td>Integer</td>
+<td>The deductible to be paid in the event of a loss</td>
+<td>1000, 2500, 5000, 7500, 10000, 15000, 25000, 50000, 75000, 100000, 250000</td>
+<td>If form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY” this field should be empty.</td>
+</tr>
+<tr>
+<td>aop_deductible_percent</td>
+<td>Y</td>
+<td>Decimal</td>
+<td>The deductible to be paid in the event of a loss</td>
+<td>0.5, 1, 2, 3, 5</td>
+<td>Only available if location_state is “TX”.  0.5 – 0.5%, 1 – 1%, 2 – 2%, 3 – 3%, 5 – 5%.  Cannot provide an aop deductible amount and an aop deductible percent for the same location.</td>
+</tr>
+<tr>
+<td>occupancy</td>
+<td>Y</td>
+<td></td>
+<td>Structure under location that details all the occupancy information for the location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>occupancy_type</td>
+<td>Y</td>
+<td>String</td>
+<td>Dwelling occupancy of the risk</td>
+<td>P, SEC, SEASL, RENT, V, COC, MH, CARE</td>
+<td>P – Primary</td>
+</tr>
+<tr>
+<td>dwelling_rental_term_type</td>
+<td>Y</td>
+<td>String</td>
+<td>The expected rental period for the primary dwelling structure</td>
+<td>NONE, DAYS, WEEKS</td>
+<td></td>
+</tr>
+<tr>
+<td>dwelling_rental_term_period</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The number of days or weeks the primary dwelling structure is rented</td>
+<td></td>
+<td>Required if dwelling_rental_term_type is “Days” or “Weeks”.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>dwelling_under_renovation_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if the location is currently under renovation</td>
+<td>Y, N</td>
+<td>Required if occupancy_type is “COC”.</td>
+</tr>
+<tr>
+<td>ppc</td>
+<td>Y</td>
+<td></td>
+<td>Structure under location that details the protection class of the location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>protection_class</td>
+<td>N*</td>
+<td>String</td>
+<td>ISO protection class for the location</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10W, SPLIT X, SPLIT Y</td>
+<td>If form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY” then this field is defaulted to empty. If form_type is not “HO3_WIND_ONLY” or “HO6_WIND_ONLY” then this field is required.</td>
+</tr>
+<tr>
+<td>dwelling_within_1000_ft_water_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating that the location is within 1000 feet of an adequate water source</td>
+<td>Y, N</td>
+<td>Required if protection class is one of “9”, ”10”, “10W”, “Split X”, or “Split Y”.  Note:  For protection classes of “10W”, “Split X”, or “Split Y” this water source must be a fire hydrant.</td>
+</tr>
+<tr>
+<td>responding_fire_dept_in_range_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating that the location has a fire department within given distance</td>
+<td>Y, N</td>
+<td>Required if protection class is one of “9”, ”10”, “10W”, “Split X”, or “Split Y”.  Note:  For a protection class of “9” or “10” this is within 10 minutes or 7.5 miles.  Note:  For a protection class of “10W” this is within 7 miles.  Note:  For protection classes “Split X” and “Split Y” this is within 5 miles.</td>
+</tr>
+<tr>
+<td>property_accessible_by_road_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating that the location is accessible by road year-round</td>
+<td>Y, N</td>
+<td>Required if protection class is one of “9”, ”10”, “10W”, “Split X”, or “Split Y”.</td>
+</tr>
+<tr>
+<td>property_occupied_daily_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating that the location is occupied or checked on daily</td>
+<td>Y, N</td>
+<td>Required if protection class is one of “9”, ”10”, “10W”, “Split X”, or “Split Y”.</td>
+</tr>
+<tr>
+<td>property_visible_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating that the location is visible to neighbors</td>
+<td>Y, N</td>
+<td>Required if protection class is one of “9”, ”10”, “10W”, “Split X”, or “Split Y”.</td>
+</tr>
+<tr>
+<td>losses</td>
+<td>Y</td>
+<td></td>
+<td>Structure underneath location containing loss information</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>loss</td>
+<td>N*</td>
+<td>Required if losses have occurred at the location</td>
+<td>Repeating structure underneath losses for each loss on the location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>loss_date</td>
+<td>N*</td>
+<td>Date</td>
+<td>Date of loss at the location</td>
+<td></td>
+<td>Required if losses have occurred at the location.  Must be in the format of yyyy-mm-dd</td>
+</tr>
+<tr>
+<td>loss_amount</td>
+<td>N*</td>
+<td>Integer</td>
+<td>Total loss amount for loss occurring on loss_date</td>
+<td></td>
+<td>Required if losses have occurred at the location.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>loss_type</td>
+<td>N*</td>
+<td>String</td>
+<td>Description of what caused the loss</td>
+<td>EARTHQUAKE, FIRE, FLOOD, LIABILITY, MOLD, OTHER, PERSONAL ARTICLES FLOATER, THEFT, WATER, WIND/HAIL</td>
+<td>Required if losses have occurred at the location.</td>
+</tr>
+<tr>
+<td>extended_liability</td>
+<td>Y</td>
+<td></td>
+<td>Structure underneath location containing the additional location information for extended liability</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>extend_liability_additional_locations_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Indicates whether liability is going to be extended to other locations</td>
+<td>Y, N</td>
+<td>If liability_limit is not “EXCLUDED” then this field is mandatory.</td>
+</tr>
+<tr>
+<td>number_additional_locations</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The full address of the additional location</td>
+<td></td>
+<td>Required if extend_liability_additional_locations_ind is “Y”.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>optional_coverages</td>
+<td>N</td>
+<td></td>
+<td>Structure underneath location that outlines the optional coverages for the location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>broad_theft_limit</td>
+<td>N*</td>
+<td>Integer</td>
+<td>Limit covered in the event of a loss of personal assets</td>
+<td>2500, 5000, 10000, 25000, 50000, 100000</td>
+<td>Only available for “DP3” form types.  Only available if occupancy_type is one of “P”, “SEC”, “SEASL”, “RENT”, “CARE”.</td>
+</tr>
+<tr>
+<td>on_and_off_premises_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Indicates whether loss of personal assets can be on or off premises</td>
+<td>Y, N</td>
+<td>Required if broad_theft_limit is provided.</td>
+</tr>
+<tr>
+<td>earthquake_sprinkler_leakage_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates whether coverage in the event of sprinkler damage due to earthquake is included</td>
+<td>Y, N</td>
+<td>Only available if form_type is one of “HO3”, “HO5”, “HO6”.  Only available if location_state is one of “CA”, “OR”, “WA”, “SC”, “MO”, “AR”, “KY”, “IL”, “IN”, “UT”, “HI”.  Only available if earthquake_coverage_ind is “Y”.</td>
+</tr>
+<tr>
+<td>enhanced_additional_coverages_ind</td>
+<td>N</td>
+<td>Character</td>
+<td></td>
+<td>Y, N</td>
+<td>Not available for form_type of “DP3”.  Not available for “COC” occupancy type.</td>
+</tr>
+<tr>
+<td>extended_replacement_cost_percent</td>
+<td>N</td>
+<td>Decimal</td>
+<td>Percentage over the policy limit covered in the event of a loss</td>
+<td>25, 50, 100</td>
+<td>Only available if form_type is one of “HO3”, “HO5”, “HO3_WIND_ONLY”.  Not available for “COC” occupancy type.</td>
+</tr>
+<tr>
+<td>golf_cart_physical_damage_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if damage to golf carts is covered</td>
+<td>Y, N</td>
+<td>Only available if occupancy_type is one of “P”, “SEC”, “SEASL”, “RENT”, “CARE”.</td>
+</tr>
+<tr>
+<td>golf_cart_limit</td>
+<td>N*</td>
+<td>Integer</td>
+<td>Sum of all golf cart values</td>
+<td></td>
+<td>Required if golf_cart_physical_damage_ind is “Y”.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>special_form_additions_alterations_ind</td>
+<td>N</td>
+<td>Character</td>
+<td></td>
+<td>Y, N</td>
+<td>Only available if form_type is “HO6”.</td>
+</tr>
+<tr>
+<td>special_form_personal_property_ind</td>
+<td>N</td>
+<td>Character</td>
+<td></td>
+<td>Y, N</td>
+<td>Only available if form_type is “HO6”.</td>
+</tr>
+<tr>
+<td>recreational_motor_vehicle_liability_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if liability on recreational vehicles such as ATVs are covered</td>
+<td>Y, N</td>
+<td>Not available if liability_limit is “Excluded”.  Not available if form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY”.  Not available if occupancy type is one of “MH”, “V”, “COC”.</td>
+</tr>
+<tr>
+<td>increased_business_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>Additional limit added to the existing business limit on the location</td>
+<td>10000, 15000, 25000</td>
+<td>Not available if form_type is “DP3”.  Not available if occupancy type is one of “MH”, “V”, “COC”.</td>
+</tr>
+<tr>
+<td>increased_special_liability_limit_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if personal or premises liability should have increased limits over what was selected</td>
+<td>Y, N</td>
+<td>Not available if liability_limit is “Excluded”.  Not available if form_type is “DP3”.  Not available if occupancy type is one of “MH”, “V”, “COC”.</td>
+</tr>
+<tr>
+<td>large_loss_deductible_waiver_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if the deductible is not applicable in the event of a large loss</td>
+<td>Y, N</td>
+<td>Only available if form_type is one of “HO3”, “HO5”, “HO6”.  Not available if occupancy_type is “COC”.</td>
+</tr>
+<tr>
+<td>limited_mold_property_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>Amount covered in the event of mold damage to the property</td>
+<td>10000, 25000, 50000, 100000, 250000, 500000, 1000000</td>
+<td></td>
+</tr>
+<tr>
+<td>limited_mold_liability_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td></td>
+<td>10000, 25000, 50000, 100000, 300000</td>
+<td>Not available if liability_limit is “Excluded”.</td>
+</tr>
+<tr>
+<td>limited_pollution_property_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td></td>
+<td>10000, 25000, 50000, 100000</td>
+<td>Only available if form_type is one of “HO3”, “HO5”, “HO6”.</td>
+</tr>
+<tr>
+<td>limited_pollution_liability_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td></td>
+<td>10000, 25000, 50000, 100000</td>
+<td>Not available if liability_limit is “Excluded”.  Only available if form_type is one of “HO3”, “HO5”, “HO6”.</td>
+</tr>
+<tr>
+<td>loss_assessment_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>Amount covered in the event of a loss in a shared area</td>
+<td>1000, 2500, 5000, 10000, 25000, 50000, 100000</td>
+<td></td>
+</tr>
+<tr>
+<td>mandatory_evacuation_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if the insured is covered if they are forced to evacuate during a disaster</td>
+<td>Y, N</td>
+<td>Not available if form_type is “DP3”.  Not available if occupancy_type is one of “MH”, “V”, “COC”.</td>
+</tr>
+<tr>
+<td>ordinance_and_law_percent</td>
+<td>N</td>
+<td>Decimal</td>
+<td>Percentage of insured value that is covered if a loss is caused by enforcement of ordinances or laws</td>
+<td>10, 15, 25</td>
+<td>10 – 10%</td>
+</tr>
+<tr>
+<td>personal_injury_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if personal injury is covered at the location</td>
+<td>Y, N</td>
+<td>Not available if liability_limit is “Excluded”.  Not available if form_type is “HO3_WIND_ONLY” or “HO6_WIND_ONLY”.  Not available if occupancy_type is “COC”.</td>
+</tr>
+<tr>
+<td>personal_property_other_location_percent</td>
+<td>N</td>
+<td>Decimal</td>
+<td></td>
+<td>10, 15</td>
+<td>10 – 10%</td>
+</tr>
+<tr>
+<td>excess_personal_property_amount</td>
+<td>N*</td>
+<td>Integer</td>
+<td>The dollar amount in excess of 10% of insured premises personal property limit</td>
+<td></td>
+<td>Required if personal_property_other_location_percent is “15”.</td>
+</tr>
+<tr>
+<td>replacement_cost_certain_structures_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Flag indicating replacement cost valuation is applied</td>
+<td>Y, N</td>
+<td>Only available if form_type is one of “HO3”, “HO5”, “HO3_WIND_ONLY”.  Not available if occupancy_type is “COC”.</td>
+</tr>
+<tr>
+<td>special_computer_coverage_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if computers are covered from non-catastrophic events</td>
+<td>Y, N</td>
+<td>Not applicable if special_form_personal_property is “Y”.  Only available if form_type is one of “HO3”, “HO5”, “HO6”.  Not available if occupancy_type is one of “MH”, “V”, “COC”.</td>
+</tr>
+<tr>
+<td>tenant_relocation_expenses_ind</td>
+<td>N</td>
+<td>Character</td>
+<td>Indicates if coverage is provided if a tenant is forced to move due to a loss</td>
+<td>Y, N</td>
+<td>Only applicable if location_state is “MA”.  Only applicable if occupancy_type is “RENT” or “CARE”.</td>
+</tr>
+<tr>
+<td>coc_soft_costs</td>
+<td>N</td>
+<td>Integer</td>
+<td>Value covered from construction soft costs for COC occupied locations</td>
+<td></td>
+<td>Only available if occupancy_type is “COC”.  Not available if form_type is “DP3”.  Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>coc_theft_of_materials</td>
+<td>N</td>
+<td>Integer</td>
+<td>Value covered if construction materials are stolen for COC occupied locations</td>
+<td></td>
+<td>Only available if occupancy_type is “COC”.  Not available if form_type is “DP3”.   Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>coc_transit</td>
+<td>N</td>
+<td>Integer</td>
+<td></td>
+<td></td>
+<td>Only available if occupancy_type is “COC”.  Not available if form_type is “DP3”.   Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>water_backup_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>Amount covered in the event of water damage from the ground up</td>
+<td>10000, 25000, 50000, 100000, 250000, 500000, 1000000</td>
+<td></td>
+</tr>
+<tr>
+<td>personal_articles_floater</td>
+<td>N</td>
+<td></td>
+<td>Structure under optional_coverages that details out each of the personal articles on the location</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>personal_articles</td>
+<td>N</td>
+<td>Character</td>
+<td>Flag indicating if personal articles are being covered for the location.</td>
+<td>Y, N</td>
+<td></td>
+</tr>
+<tr>
+<td>deductible_excluded_ind</td>
+<td>N*</td>
+<td>Character</td>
+<td>Flag indicating if the personal articles deductible is excluded for this location</td>
+<td>Y, N</td>
+<td>Required if personal_articles is “Y”.</td>
+</tr>
+<tr>
+<td>deductible_amount</td>
+<td>N*</td>
+<td>Integer</td>
+<td>Amount to be paid in the event of a loss</td>
+<td>2500, 5000, 10000, 15000, 25000, 50000</td>
+<td>Required if personal_articles is “Y”.</td>
+</tr>
+<tr>
+<td>blanket_fine_arts_breakage_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all blanketed fine arts with breakage at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>blanket_fine_arts_non_breakage_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all blanketed fine arts without breakage at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>blanket_jewelry_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all blanketed jewelry at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>cameras_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all cameras at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>fine_arts_breakage_scheduled_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all scheduled fine arts with breakage at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>fine_arts_non_breakage_scheduled_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all scheduled fine arts without breakage at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>furs_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all furs at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>golf_equipment_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all golf equipment at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>firearms_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all firearms at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>mens_jewelry_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all men’s jewelry at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>musical_instruments_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all musical instruments at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>stamps_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all postage stamps at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>coins_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all coins at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>silverware_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all silverware at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>womens_jewelry_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all women’s jewelry at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>vault_jewelry_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all jewelry in vaults at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>wine_collections_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all wine collections at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+<tr>
+<td>blanket_wine_collections_limit</td>
+<td>N</td>
+<td>Integer</td>
+<td>The total value of all blanket wine collections at the location</td>
+<td></td>
+<td>Must be greater than or equal to 0.</td>
+</tr>
+</tbody></table>
+<h2 id='bind-submission'>Bind Submission</h2><pre class="highlight plaintext"><code>
+```shell
+curl 
+</code></pre><pre class="highlight plaintext"><code>
+
+
+```json
+
+</code></pre>
+<p>This endpoint binds the submission on the VMGA Platform.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://brit.virtualmga.com/restservice/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value Type</th>
+<th>Description</th>
+<th>Accepted Values</th>
+<th>Validation Rules/Notes</th>
+</tr>
+</thead><tbody>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
@@ -494,10 +2049,8 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="php">PHP</a>
           </div>
       </div>
     </div>
